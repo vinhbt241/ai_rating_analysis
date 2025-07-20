@@ -3,8 +3,8 @@ class PayloadsController < ApplicationController
     @payload = Payload.new(payload_params)
 
     if @payload.save
-      # analyzed_result = AnalyzePayloadService.call(payload:)
-      # @payload.update(analyzed_result:)
+      analyzed_result = AnalyzePayloadService.call(payload:)
+      @payload.update(analyzed_result:)
 
       flash[:notice] = "Rating submitted & analyzed successfully!"
       redirect_to payload_path(@payload)

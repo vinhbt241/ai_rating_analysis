@@ -31,11 +31,11 @@ class AnalyzePayloadService < ApplicationService
       The review data is provided in JSON format:
       ```json
       {
-        "Comment": "Chất lượng sản phẩm: không thể nào chê vào đâu được nữa ,chất lượng thực sự kkkk",
-        "ProductName": "Loa Bluetooth Chữ G Led RGB, REMI OFFICIAL Sạc Nhanh Không Dây, Đèn Nháy Theo Nhạc, Thiết Kế Sang Trọng",
-        "BoughtProducts": ["Loa Bluetooth Chữ G Led RGB, REMI OFFICIAL Sạc Nhanh Không Dây, Đèn Nháy Theo Nhạc, Thiết Kế Sang Trọng, Loa G Đồng Hồ"],
-        "DetailRating": "product_quality: 5\nseller_service: 5\ndelivery_service: 5",
-        "SubCategory": "Loa"
+        "Comment": "#{payload.comment}",
+        "ProductName": "#{payload.product_name}",
+        "BoughtProducts": [#{payload.bought_products}],
+        "DetailRating": "product_quality: #{payload.product_quality_rating}}, seller_service: #{payload.seller_service_rating}, delivery_service: #{payload.delivery_service_rating}",
+        "SubCategory": "#{payload.sub_category}"
       }
       ```
       The corresponding review images are also provided.
@@ -56,7 +56,7 @@ class AnalyzePayloadService < ApplicationService
 
       * **ProductMatchingConfidence**: A confidence score from 0 to 100 indicating how well the comment and images match the product name and description.
 
-      * **ImagesRelatedToProduct**: `true`, `false`, or `null` — Are the images likely related to the product? If no images are available, return `NULL`.
+      * **ImagesRelatedToProduct**: `true` or `false` — Are the images likely related to the product? If no images are available, return `false`.
 
       * **ImagesRelatedToProductReasoning**: Briefly explain how you determined whether the images match the product.
 
