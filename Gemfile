@@ -23,6 +23,8 @@ gem "kamal", require: false
 
 gem "thruster", require: false
 
+gem "simple_form"
+
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

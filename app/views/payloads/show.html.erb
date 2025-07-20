@@ -20,7 +20,18 @@
                     <b>Bought products:</b> <%= payload.bought_products %>
                   </div>
                   <div>
-                    <b>Detailed Rating:</b> <%= payload.detail_rating %>
+                    <b>Detailed Ratings:</b>
+                  </div>
+                  <div class="mt-1">
+                    <span class="badge bg-info text-white me-1">
+                      Product quality: <%= payload.product_quality_rating %>
+                    </span>
+                    <span class="badge bg-info text-white me-1">
+                      Seller service: <%= payload.seller_service_rating %>
+                    </span>
+                    <span class="badge bg-info text-white me-1">
+                      Delivery service: <%= payload.delivery_service_rating %>
+                    </span>
                   </div>
                   <div>
                     <b>Sub category:</b> <%= payload.sub_category %>

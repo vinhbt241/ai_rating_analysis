@@ -3,7 +3,75 @@
   <div class="page-wrapper">
     <div class="page-body">
       <div class="container-xl">
-
+        <div class="row">
+          <div class="h1">
+            Welcome to Ratinalyze
+          </div>
+        </div>
+        <div class="row">
+          <strong>
+            Turn Ratings into Real Insights
+          </strong>
+        </div>
+        <div class="row">
+          <p>
+            At Rationalyze, we go beyond stars and scores. Simply input a product rating—text, images, or both—and let our intelligent system analyze it for you. Using AI, we break down each review to give you a deeper understanding of:
+            <ul>
+              <li>
+                <strong>
+                  📦 Product Type Detection
+                </strong>
+              </li>
+              <li>
+                <strong>
+                  🎯 Rating Tone Analysis (Positive, Neutral, or Negative)
+                </strong>
+              </li>
+              <li>
+                <strong>
+                  💬 Emotional Keywords Extraction
+                </strong>
+              </li>
+              <li>
+                <strong>
+                  🧠 Text & Image Consistency Check
+                </strong>
+              </li>
+              <li>
+                <strong>
+                  🔍 Insightful Summaries for Smarter Decisions
+                </strong>
+              </li>
+            </ul>
+            Whether you're a brand seeking feedback clarity or a buyer wanting to see beyond the surface, Rationalyze helps you make sense of the noise.
+          </p>
+        </div>
+        <div class="row mt-3">
+          <h2>Ready to discover what reviews really say?</h2>
+        </div>
+        <div class="row mt-1">
+          <div class="card">
+            <div class="card-body">
+              <%= simple_form_for @payload do |f| %>
+                <%= f.input :comment %>
+                <%= f.input :product_name %>
+                <%= f.input :bought_products %>
+                <div class="row">
+                  <strong>Detailed Ratings</strong>
+                  <div class="col-4"><%= f.input :product_quality_rating %></div>
+                  <div class="col-4"><%= f.input :seller_service_rating %></div>
+                  <div class="col-4"><%= f.input :delivery_service_rating %></div>
+                </div>
+                <%= f.input :sub_category %>
+                <div class="row form-group mb-3">
+                  <%= f.label :product_images, 'Uploaded Images', class: 'form-label' %>
+                  <%= f.file_field :product_images, multiple: true %>
+                </div>
+                <%= f.button :submit, 'Submit rating', class: 'btn btn-primary' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
