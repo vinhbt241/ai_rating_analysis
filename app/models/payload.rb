@@ -7,4 +7,7 @@ class Payload < ApplicationRecord
   validates :product_quality_rating, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
   validates :seller_service_rating, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
   validates :delivery_service_rating, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
+
+  # scopes
+  scope :analyzed, -> { where.not("analyzed_result = '{}'") }
 end

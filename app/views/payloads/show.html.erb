@@ -11,37 +11,37 @@
 
                 <div class="d-flex flex-column">
                   <div>
-                    <b>Comment:</b> <%= payload.comment %>
+                    <b>Comment:</b> <%= @payload.comment %>
                   </div>
                   <div>
-                    <b>Product name:</b> <%= payload.product_name %>
+                    <b>Product name:</b> <%= @payload.product_name %>
                   </div>
                   <div>
-                    <b>Bought products:</b> <%= payload.bought_products %>
+                    <b>Bought products:</b> <%= @payload.bought_products %>
                   </div>
                   <div>
                     <b>Detailed Ratings:</b>
                   </div>
                   <div class="mt-1">
                     <span class="badge bg-info text-white me-1">
-                      Product quality: <%= payload.product_quality_rating %>
+                      Product quality: <%= @payload.product_quality_rating %>
                     </span>
                     <span class="badge bg-info text-white me-1">
-                      Seller service: <%= payload.seller_service_rating %>
+                      Seller service: <%= @payload.seller_service_rating %>
                     </span>
                     <span class="badge bg-info text-white me-1">
-                      Delivery service: <%= payload.delivery_service_rating %>
+                      Delivery service: <%= @payload.delivery_service_rating %>
                     </span>
                   </div>
                   <div>
-                    <b>Sub category:</b> <%= payload.sub_category %>
+                    <b>Sub category:</b> <%= @payload.sub_category %>
                   </div>
                   <div>
                     <b>Product images:</b>
                     <div class="card mt-2">
                       <div class="card card-body">
                         <div class="row">
-                          <% payload.product_images.each do |product_image| %>
+                          <% @payload.product_images.each do |product_image| %>
                             <%= image_tag product_image, class: 'col-2' %>
                           <% end %>
                         </div>
@@ -59,8 +59,8 @@
             <div class="card">
               <div class="card-body">
                 <h2>Analyzed Result</h2>
-                <% if payload.analyzed_result.present? %>
-                  <% payload.analyzed_result.to_h.deep_symbolize_keys.each do |k, v| %>
+                <% if @payload.analyzed_result.present? %>
+                  <% @payload.analyzed_result.to_h.deep_symbolize_keys.each do |k, v| %>
                     <div class="mt-2">
                       <b><%= k.to_s.humanize %>:</b> <%= render_attribute(v) %>
                     </div>

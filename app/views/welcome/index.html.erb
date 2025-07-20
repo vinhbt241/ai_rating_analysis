@@ -48,29 +48,41 @@
         </div>
         <div class="row mt-3">
           <h2>Ready to discover what reviews really say?</h2>
-        </div>
-        <div class="row mt-1">
-          <div class="card">
-            <div class="card-body">
-              <%= simple_form_for @payload do |f| %>
-                <%= f.input :comment %>
-                <%= f.input :product_name %>
-                <%= f.input :bought_products %>
-                <div class="row">
-                  <strong>Detailed Ratings</strong>
-                  <div class="col-4"><%= f.input :product_quality_rating %></div>
-                  <div class="col-4"><%= f.input :seller_service_rating %></div>
-                  <div class="col-4"><%= f.input :delivery_service_rating %></div>
-                </div>
-                <%= f.input :sub_category %>
-                <div class="row form-group mb-3">
-                  <%= f.label :product_images, 'Uploaded Images', class: 'form-label' %>
-                  <%= f.file_field :product_images, multiple: true %>
-                </div>
-                <%= f.button :submit, 'Submit rating', class: 'btn btn-primary' %>
-              <% end %>
-            </div>
+          <div>
+            <%= link_to "Let's analyze your rating!", new_payload_path, class: 'btn btn-primary' %>
           </div>
+        </div>
+
+        <div class="row mt-3">
+          <h2>Recent analyzed ratings</h2>
+
+          <% @payloads.each do |payload| %>
+            <div class="row">
+              <div class="column">
+                <div class="card">
+                  <div class="card-header">
+                    <strong><%= payload.product_name %></strong>
+                  </div>
+                  <div class="card-body">
+                    <p><%= payload.comment %></p>
+                    <div class="mt-1">
+                      <span class="badge bg-info text-white me-1">
+                        Product quality: <%= payload.product_quality_rating %>
+                      </span>
+                      <span class="badge bg-info text-white me-1">
+                        Seller service: <%= payload.seller_service_rating %>
+                      </span>
+                      <span class="badge bg-info text-white me-1">
+                        Delivery service: <%= payload.delivery_service_rating %>
+                      </span>
+                    </div>
+
+                    <%= link_to 'See the analyze result ->', payload_path(payload), class: 'btn btn-primary mt-4' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

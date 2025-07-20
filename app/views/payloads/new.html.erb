@@ -1,0 +1,36 @@
+<div class="page">
+  <%= render partial: 'shared/header' %>
+  <div class="page-wrapper">
+    <div class="page-body">
+      <div class="container-xl">
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h1>Input rating details</h1>
+            </div>
+            <div class="card-body">
+              <%= simple_form_for @payload do |f| %>
+                <%= f.input :comment %>
+                <%= f.input :product_name %>
+                <%= f.input :bought_products %>
+                <div class="row">
+                  <strong>Detailed Ratings</strong>
+                  <div class="col-4"><%= f.input :product_quality_rating %></div>
+                  <div class="col-4"><%= f.input :seller_service_rating %></div>
+                  <div class="col-4"><%= f.input :delivery_service_rating %></div>
+                </div>
+                <%= f.input :sub_category %>
+                <div class="row form-group mb-3">
+                  <%= f.label :product_images, 'Uploaded Images', class: 'form-label' %>
+                  <%= f.file_field :product_images, multiple: true %>
+                </div>
+                <%= f.button :submit, 'Submit rating', class: 'btn btn-primary' %>
+                <%= link_to 'Back to homepage', root_path, class: 'btn btn-secondary' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

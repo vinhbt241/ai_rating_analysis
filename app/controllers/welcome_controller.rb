@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    @payload = Payload.new
+    @payloads = Payload.order(created_at: :desc).analyzed.take(5)
   end
 end

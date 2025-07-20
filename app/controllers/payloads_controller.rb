@@ -9,14 +9,18 @@ class PayloadsController < ApplicationController
       flash[:notice] = "Rating submitted & analyzed successfully!"
       redirect_to payload_path(@payload)
     else
-      render "welcome/index", status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def show
-    payload = Payload.find(params[:id])
+  def new
+    @payload = Payload.new
+  end
 
-    render :show, locals: { payload: }
+  def show
+    @payload = Payload.find(params[:id])
+
+    render :show
   end
 
   private
