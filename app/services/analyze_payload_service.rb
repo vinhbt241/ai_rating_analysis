@@ -11,9 +11,12 @@ class AnalyzePayloadService < ApplicationService
       parameters: {
         model: "gpt-4o",
         response_format: { type: "json_object" },
-        messages: [ {
-          role: "user", content:
-        } ]
+        messages: [
+          {
+            role: "user",
+            content:
+          }
+        ]
       }
     )
 
@@ -24,7 +27,18 @@ class AnalyzePayloadService < ApplicationService
     end
   end
 
+
   def content
+    [
+      {
+        type: "text",
+        text: text_content
+      },
+      images_content
+    ].flatten
+  end
+
+  def text_content
     %Q(
       Please analyze the following Shopee review and return structured insights based on the fields listed below.
 
@@ -88,5 +102,28 @@ class AnalyzePayloadService < ApplicationService
 
       ---
     )
+  end
+
+  def images_content
+    urls = []
+
+    payload.product_images.find_each do |attachment|
+      mime_type = attachment.content_type
+      extension = Rack::Mime::MIME_TYPES.invert[mime_type] || File.extname(attachment.filename.to_s)
+      file = Tempfile.new([ "product_image", extension ], binmode: true)
+      file.write(attachment.download)
+      file.rewind
+
+      base64_image = Base64.strict_encode64(file.read)
+
+      urls << {
+        type: "image_url",
+        image_url: {
+          url: "data:#{mime_type};base64,#{base64_image}"
+        }
+      }
+    end
+
+    urls
   end
 end
