@@ -40,4 +40,17 @@ class ImageAppClient
       headers: { "Content-Type" => "application/json" }
     )
   end
+
+  def compare_list_images(images_base64_1:, images_base64_2:)
+    self.class.post(
+      "/compare_list_images",
+      body: {
+        list_image1: images_base64_1,
+        type_image1: "base64",
+        list_image2: images_base64_2,
+        type_image: "base64",
+        method: "googlenet"
+      }
+    )
+  end
 end
