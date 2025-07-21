@@ -7,6 +7,7 @@ class PayloadsController < ApplicationController
       # @payload.update(analyzed_result:)
 
       generate_attention_heatmaps(payload: @payload)
+      generate_sentiment_analysis(payload: @payload)
 
       flash[:notice] = "Rating submitted & analyzed successfully!"
       redirect_to payload_path(@payload)
@@ -37,5 +38,13 @@ class PayloadsController < ApplicationController
       base64_image = encoded_data[:base64_attachment]
       GenerateAttentionHeatmapService.call(base64_image:, payload:)
     end
+  end
+
+  def generate_sentiment_analysis(payload:)
+    text_input = payload.comment
+    sentiment_analysis_result = AnalyzeSentimentService.call(text_input:)
+    payload.update(
+      sentiment_analysis_result:
+    )
   end
 end

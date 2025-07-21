@@ -11,4 +11,14 @@ class Payload < ApplicationRecord
 
   # scopes
   scope :analyzed, -> { where.not("analyzed_result = '{}'") }
+
+  def comment_tone
+    return if sentiment_analysis_result.blank?
+
+    {
+      POS: "POSITIVE",
+      NEG: "NEGATIVE",
+      NEU: "NEUTRAL"
+    }[sentiment_analysis_result["pred"].max.first.to_sym]
+  end
 end
