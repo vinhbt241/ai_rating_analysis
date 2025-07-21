@@ -1,5 +1,6 @@
 class Payload < ApplicationRecord
   has_many_attached :product_images
+  has_many_attached :attention_heatmaps
 
   # validations
   validates :comment, presence: true

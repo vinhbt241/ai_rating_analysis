@@ -3,8 +3,10 @@ class PayloadsController < ApplicationController
     @payload = Payload.new(payload_params)
 
     if @payload.save
-      analyzed_result = AnalyzePayloadService.call(payload: @payload)
-      @payload.update(analyzed_result:)
+      # analyzed_result = AnalyzePayloadService.call(payload: @payload)
+      # @payload.update(analyzed_result:)
+
+      generate_attention_heatmaps(payload: @payload)
 
       flash[:notice] = "Rating submitted & analyzed successfully!"
       redirect_to payload_path(@payload)
@@ -27,5 +29,13 @@ class PayloadsController < ApplicationController
 
   def payload_params
     params.require(:payload).permit!
+  end
+
+  def generate_attention_heatmaps(payload:)
+    payload.product_images.find_each do |image|
+      encoded_data = EncodeBase64AttachmentService.call(attachment: image)
+      base64_image = encoded_data[:base64_attachment]
+      GenerateAttentionHeatmapService.call(base64_image:, payload:)
+    end
   end
 end

@@ -66,6 +66,23 @@
                     </div>
                   <% end %>
                 <% end %>
+
+                <div class="row mt-2">
+                  <div class="col">
+                    <div class="row">
+                      <b>Attention heatmaps:</b>
+                      <div class="card mt-2">
+                        <div class="card card-body">
+                          <div class="row">
+                            <% @payload.attention_heatmaps.each do |heatmap| %>
+                              <%= image_tag heatmap, class: 'col-2' %>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -108,13 +108,9 @@ class AnalyzePayloadService < ApplicationService
     urls = []
 
     payload.product_images.find_each do |attachment|
-      mime_type = attachment.content_type
-      extension = Rack::Mime::MIME_TYPES.invert[mime_type] || File.extname(attachment.filename.to_s)
-      file = Tempfile.new([ "product_image", extension ], binmode: true)
-      file.write(attachment.download)
-      file.rewind
-
-      base64_image = Base64.strict_encode64(file.read)
+      base64_attachment = EncodeBase64AttachmentService.call(attachment:)
+      mime_type = base64_attachment[:mime_type]
+      base64_image = base64_attachment[:base64_attachment]
 
       urls << {
         type: "image_url",
