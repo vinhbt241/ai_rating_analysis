@@ -6,8 +6,8 @@ class PayloadsController < ApplicationController
       # analyzed_result = AnalyzePayloadService.call(payload: @payload)
       # @payload.update(analyzed_result:)
 
-      generate_attention_heatmaps(payload: @payload)
-      generate_sentiment_analysis(payload: @payload)
+      # generate_attention_heatmaps(payload: @payload)
+      # generate_sentiment_analysis(payload: @payload)
 
       flash[:notice] = "Rating submitted & analyzed successfully!"
       redirect_to payload_path(@payload)

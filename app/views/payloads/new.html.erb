@@ -24,6 +24,10 @@
                   <%= f.label :product_images, 'Uploaded Images', class: 'form-label' %>
                   <%= f.file_field :product_images, multiple: true %>
                 </div>
+                <div class="row form-group mb-3">
+                  <%= f.label :shop_images, 'Product Images', class: 'form-label' %>
+                  <%= f.file_field :shop_images, multiple: true %>
+                </div>
                 <%= f.button :submit, 'Submit rating', class: 'btn btn-primary' %>
                 <%= link_to 'Back to homepage', root_path, class: 'btn btn-secondary' %>
               <% end %>
