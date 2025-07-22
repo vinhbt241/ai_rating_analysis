@@ -1,0 +1,39 @@
+<div class="page">
+  <%= render partial: 'shared/header' %>
+  <div class="page-wrapper">
+    <div class="page-body">
+      <div class="container-xl">
+        <div class="row mb-4">
+          <h1 class="col">CNN heatmaps</h1>
+          <%= link_to 'Generate new heatmap', new_payload_cnn_heatmap_path(payload_id: @payload.id), class: 'col-2 btn btn-primary ms-auto' %>
+          <%= link_to 'Return to rating', payload_path(@payload), class: 'ms-2 col-2 btn btn-secondary' %>
+        </div>
+        <% @cnn_heatmaps.each do |cnn_heatmap| %>
+          <div class="row">
+            <div class="card">
+              <div class="card-body px-5">
+                <div class="row">
+                  <div class="col h3">Backbone: <%= cnn_heatmap.backbone %></div>
+                  <div class="col h3">Target layer: <%= cnn_heatmap.target_layer %></div>
+                  <div class="col h3">Threshold: <%= cnn_heatmap.threshold.round(2) %></div>
+                  <div class="col h3">Alpha: <%= cnn_heatmap.alpha.round(2) %></div>
+                  <div class="col h3">RGB: (<%= [cnn_heatmap.color_r, cnn_heatmap.color_g, cnn_heatmap.color_b].join(', ') %>)</div>
+                </div>
+                <div class="row mt-3 justify-content-center">
+                  <div class="col-4 d-flex flex-column align-items-center">
+                    <h2>Input image</h2>
+                    <%= image_tag cnn_heatmap.payload.product_images.find(cnn_heatmap.image_id) %>
+                  </div>
+                  <div class="col-4 d-flex flex-column align-items-center">
+                    <h2>CNN Heatmap</h2>
+                    <%= image_tag cnn_heatmap.heatmap %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

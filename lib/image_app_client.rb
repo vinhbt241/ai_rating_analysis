@@ -7,18 +7,18 @@ class ImageAppClient
     self.class.get("/list_models_cnn")
   end
 
-  def cnn_heatmap(image_base64:)
+  def cnn_heatmap(image_base64:, backbone:, target_layer:, threshold:, color:, alpha:)
     self.class.post(
       "/cnn_heatmap",
       body: {
         image_base64:,
         type_image: "base64",
         param: {
-          backbone: "googlenet",
-          target_layer: "inception5a",
-          threshold: 0.5,
-          color: [ 0, 0, 255 ],
-          alpha: 0.5
+          backbone:,
+          target_layer:,
+          threshold:,
+          color:,
+          alpha:
         }
       }.to_json,
       headers: { "Content-Type" => "application/json" }

@@ -13,6 +13,9 @@ class Payload < ApplicationRecord
   # scopes
   scope :analyzed, -> { where.not("analyzed_result = '{}'") }
 
+  # associations
+  has_many :cnn_heatmaps, dependent: :destroy
+
   def comment_tone
     return if sentiment_analysis_result.blank?
 

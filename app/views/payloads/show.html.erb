@@ -70,7 +70,10 @@
                 <div class="row mt-5">
                   <div class="col">
                     <div class="row">
-                      <h2>Attention Heatmaps</h2>
+                      <h2 class="col">Attention Heatmaps</h2>
+                      <%= link_to "Want to see more? Checkout our CNN heatmaps!", payload_cnn_heatmaps_path(payload_id: @payload.id), class: "ms-auto col-auto btn btn-primary" %>
+                    </div>
+                    <div class="row">
                       <div class="card mt-2">
                         <div class="card card-body">
                           <div class="row">

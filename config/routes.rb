@@ -3,5 +3,13 @@ Rails.application.routes.draw do
 
   root "welcome#index"
 
-  resources :payloads
+  resources :payloads do
+    scope module: :payloads do
+      resources :cnn_heatmaps, only: %i[index new create]
+    end
+
+    member do
+      post :compare_matching
+    end
+  end
 end

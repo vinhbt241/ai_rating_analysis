@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_21_134154) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_22_125809) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_21_134154) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "cnn_heatmaps", force: :cascade do |t|
+    t.integer "payload_id"
+    t.bigint "image_id"
+    t.string "backbone"
+    t.string "target_layer"
+    t.float "threshold"
+    t.float "alpha"
+    t.integer "color_r"
+    t.integer "color_g"
+    t.integer "color_b"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payload_id"], name: "index_cnn_heatmaps_on_payload_id"
   end
 
   create_table "payloads", force: :cascade do |t|

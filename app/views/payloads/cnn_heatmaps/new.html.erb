@@ -1,0 +1,51 @@
+<div class="page">
+  <%= render partial: 'shared/header' %>
+  <div class="page-wrapper">
+    <div class="page-body">
+      <div class="container-xl">
+        <div class="row">
+          <div class="card">
+            <div class="card-header">
+              <h1>Choose the payload's images and CNN inputs</h1>
+            </div>
+            <div class="card-body">
+              <%= simple_form_for [@payload, @cnn_heatmap], html: { data: { controller: 'cnn-heatmap', cnn_heatmap_layers_value: CnnHeatmap::MODELS } } do |f| %>
+                <div class="row">
+                  <% @payload.product_images.each do |image| %>
+                      <div class="col-1 d-flex gap-1 align-items-center">
+                        <input type="radio" value="<%= image.id %>" name="cnn_heatmap[image_id]" id="cnn_heatmap_image_id_<%= image.id %>">
+                        <label for="cnn_heatmap_image_id_<%= image.id %>">
+                          <%= image_tag image %>
+                        </label>
+                      </div>
+                    <% end %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.input :backbone, as: :select, collection: CnnHeatmap::MODELS.keys, prompt: 'Choose model', input_html: { data: { cnn_heatmap_target: 'model', action: 'change->cnn-heatmap#updateLayers' } } %>
+                </div>
+
+                <div class="form-group my-2">
+                  <%= f.input :target_layer, as: :select, collection: CnnHeatmap::MODELS.keys, prompt: 'Choose target layer', input_html: { data: { cnn_heatmap_target: 'layer' } } %>
+                </div>
+
+                <%= f.input :threshold, label: 'Threshold (from 0 to 1)' %>
+
+                <%= f.input :alpha, label: 'Alpha (from 0 to 1)' %>
+
+                <%= f.input :color_r, label: 'Color R (from 0 to 255)' %>
+
+                <%= f.input :color_g, label: 'Color G (from 0 to 255)' %>
+
+                <%= f.input :color_b, label: 'Color B (from 0 to 255)' %>
+
+                <%= f.submit "Generate CNN heatmap", class: 'btn btn-primary mt-4' %>
+                <%= link_to 'Cancel', payload_cnn_heatmaps_path(payload_id: @payload.id), class: 'btn btn-secondary mt-4' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
